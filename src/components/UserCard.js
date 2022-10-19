@@ -2,16 +2,16 @@ import token from '../token';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-function UserCard(params) {
+function UserCard({ userUrl }) {
     const [user, setUser] = useState(null);
 
-    // useEffect(() => {
-    // axios.get(params["user-url"], { 'auth': token })
-    // .then(response => {
-    // setUser(response.data);
-    // })
-    // .catch(err => { alert(err.message) });
-    // }, []);
+    useEffect(() => {
+        axios.get(userUrl, { 'auth': token })
+            .then(response => {
+                setUser(response.data);
+            })
+            .catch(err => { alert(err.message) });
+    }, [userUrl]);
 
     return user ?
         (<div className="card mb-3" style={{
@@ -33,7 +33,7 @@ function UserCard(params) {
                                 <th scope="col">Following</th>
                             </tr>
                             <tr>
-                                <td scope="row">{user.id}</td>
+                                <td>{user.id}</td>
                                 <td>{user.public_repos}</td>
                                 <td>{user.followers}</td>
                                 <td>{user.following}</td>
@@ -69,7 +69,7 @@ function UserCard(params) {
                                 <th scope="col">Following</th>
                             </tr>
                             <tr>
-                                <td scope="row" className="placeholder-glow">
+                                <td className="placeholder-glow">
                                     <span className="placeholder col-6" ></span>
                                 </td>
                                 <td className="placeholder-glow">
@@ -83,9 +83,9 @@ function UserCard(params) {
                                 </td>
                             </tr>
                         </table>
-                        <a href="#" className="card-link disabled placeholder col-6" target="_blank" rel="noopener noreferrer">
+                        <button href="#" className="card-link disabled placeholder col-6 button" target="_blank" rel="noopener noreferrer">
                             Open on GitHub
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

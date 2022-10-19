@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import UserCard from './UserCard';
 
-function UsersListing(props) {
+function UsersListing({ users }) {
     return (
-        <div className="container">
-            {props.users.map(user => (<UserCard user-url={user.url} />))}
+        <div className="container mr-auto ml-auto mt-auto">
+            {users.map(user => (
+                <div className="row justify-content-center">
+                    <UserCard userUrl={user.url} />
+                </div>
+            ))}
         </div>
     );
 }
